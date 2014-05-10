@@ -5,4 +5,4 @@
 	deps:runtime-requirement   [ deps:on "Attribute::Handlers"^^deps:CpanId ];
 	deps:runtime-requirement   [ deps:on "Devel::StrictMode"^^deps:CpanId ];
 	deps:test-requirement      [ deps:on "Test::More 0.96"^^deps:CpanId ];
-	deps:test-requirement      [ deps:on "Test::Fatal"^^deps:CpanId ];
+	deps:test-requirement      [ deps:on "Test::Fatal"^^deps:CpanId ].
