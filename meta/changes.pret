@@ -4,3 +4,9 @@
 	issued  2013-06-17;
 	label   "Initial release".
 
+`Attribute-QueueStack 0.002 cpan:TOBYINK`
+	issued  2014-05-10;
+	changeset [
+		item "use Dist::Inkt"^^Packaging;
+		item "Altered the decision mechanism as to whether the attributes are 'ARMED'. Attribute::QueueStack now mostly just defers to Devel::StrictMode to make the decision."^^Change;
+	].

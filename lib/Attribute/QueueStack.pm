@@ -8,7 +8,7 @@ use Devel::StrictMode;
 
 BEGIN {
 	$Attribute::QueueStack::AUTHORITY = 'cpan:TOBYINK';
-	$Attribute::QueueStack::VERSION   = '0.001';
+	$Attribute::QueueStack::VERSION   = '0.002';
 }
 
 sub _detect_strict ()
