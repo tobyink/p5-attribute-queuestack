@@ -4,6 +4,7 @@ use 5.006;
 use strict;
 
 use Attribute::Handlers;
+use Devel::StrictMode;
 
 BEGIN {
 	$Attribute::QueueStack::AUTHORITY = 'cpan:TOBYINK';
@@ -12,16 +13,10 @@ BEGIN {
 
 sub _detect_strict ()
 {
-	return if $ENV{PERL_QUEUESTACK_LOOSE};
-	return 1 if $^W;
-	return 1 if grep $ENV{$_}, qw(
-		EXTENDED_TESTING
-		RELEASE_TESTING
-		AUTHOR_TESTING
-		AUTOMATED_TESTING
-		PERL_QUEUESTACK_STRICT
-	);
-	return;
+	return 0 if $ENV{PERL_QUEUESTACK_LOOSE};
+	return 1 if STRICT;
+	return 1 if $ENV{PERL_QUEUESTACK_STRICT};
+	return 0;
 }
 
 BEGIN { *ARMED = _detect_strict ? sub () { !!1 } : sub () { !!0 } };
@@ -77,10 +72,9 @@ This allows you to designate an array as either a queue or a stack.
 Under normal circumstances, it acts as a no-op. In other words, your
 array is unaffected by the presence of the attributes.
 
-However, if Perl is run with the C<< -w >> flag, or certain environment
-variables are set (see ENVIRONMENT below), Attribute::QueueStack
-suddenly goes into deadly mode, and complains if you try to abuse an array
-or queue.
+However, if Perl is run with certain environment variables set (see
+L<Devel::StrictMode>), Attribute::QueueStack suddenly goes into deadly
+mode, and complains if you try to abuse an array or queue.
 
 Why this state of affairs? Well, this module works via tied arrays.
 Perl's C<tie> mechanism is pretty slow. So the idea is that you'd want
@@ -166,31 +160,10 @@ You can empty the stack entirely.
 
 =head1 ENVIRONMENT
 
-Setting any of the following environment variables to a true value
-will arm this module:
-
-=over
-
-=item *
-
-C<EXTENDED_TESTING>
-
-=item *
-
-C<RELEASE_TESTING>
-
-=item *
-
-C<AUTHOR_TESTING>
-
-=item *
-
-C<AUTOMATED_TESTING>
-
-=back
-
-The variables C<PERL_QUEUESTACK_LOOSE> and C<PERL_QUEUESTACK_STRICT>
-may also be used as overrides.
+This module uses L<Devel::StrictMode> to determine if its attributes
+should be enforced. The variables C<PERL_QUEUESTACK_LOOSE> and
+C<PERL_QUEUESTACK_STRICT> may be used to override Devel::StrictMode's
+decision.
 
 =head1 BUGS
 
@@ -198,6 +171,8 @@ Please report any bugs to
 L<http://rt.cpan.org/Dist/Display.html?Queue=Attribute-QueueStack>.
 
 =head1 SEE ALSO
+
+L<Devel::StrictMode>.
 
 The following modules are used as part of the implementation of
 Attribute::QueueStack, but can alternatively be used on their own:
