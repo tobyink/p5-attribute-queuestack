@@ -1,11 +1,8 @@
 # This file provides instructions for packaging.
 
 `Attribute-QueueStack`
-	perl_version_from m`Attribute::QueueStack`;
-	version_from      m`Attribute::QueueStack`;
-	readme_from       m`Attribute::QueueStack`;
-	requires          p`Attribute::Handlers`;
-	test_requires     p`Test::More 0.96`;
-	test_requires     p`Test::Fatal`;
-	.
-
+	deps:runtime-requirement   [ deps:on "perl 5.006"^^deps:CpanId ];
+	deps:runtime-requirement   [ deps:on "Attribute::Handlers"^^deps:CpanId ];
+	deps:runtime-requirement   [ deps:on "Devel::StrictMode"^^deps:CpanId ];
+	deps:test-requirement      [ deps:on "Test::More 0.96"^^deps:CpanId ];
+	deps:test-requirement      [ deps:on "Test::Fatal"^^deps:CpanId ];
