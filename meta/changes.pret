@@ -10,3 +10,10 @@
 		item "use Dist::Inkt"^^Packaging;
 		item "Altered the decision mechanism as to whether the attributes are 'ARMED'. Attribute::QueueStack now mostly just defers to Devel::StrictMode to make the decision."^^Change;
 	].
+
+`Attribute-QueueStack 0.003 cpan:TOBYINK`
+	issued  2014-09-19;
+	label   "The 'Better Together' Release";
+	changeset [
+		item "use strict/warnings everywhere."^^Change;
+	].
